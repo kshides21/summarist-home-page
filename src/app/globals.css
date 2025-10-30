@@ -213,6 +213,7 @@ button:disabled {
   font-weight: 500;
   color: #6b757b;
   margin-bottom: 16px;
+  transition: color 0.8s ease, opacity 0.8s ease;
 }
 
 .statistics__heading:last-child {
@@ -221,6 +222,7 @@ button:disabled {
 
 .statistics__heading--active {
   color: #2bd97c;
+  font-weight: bold;
 }
 
 .statistics__wrapper {
@@ -444,6 +446,14 @@ button:disabled {
 .footer__copyright {
   color: #032b41;
   font-weight: 500;
+}
+
+.click {
+  cursor: pointer;
+}
+
+.click-nav:hover {
+  color: #2bd97c;
 }
 
 @media (max-width: 768px) {
