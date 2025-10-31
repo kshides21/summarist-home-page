@@ -1,5 +1,5 @@
 import { FaPlayCircle } from "react-icons/fa";
-import styles from "../src/app/for-you/page.module.css";
+import styles from "../src/app/explore/for-you/page.module.css";
 
 export default async function Selected() {
   const res = await fetch(
@@ -12,7 +12,7 @@ export default async function Selected() {
   const selected = await res.json();
 
   return (
-    <div className={styles.container__selected}>
+    <a href="/" className={styles.container__selected}>
       <div className={styles.selected__sub__title}>{selected[0].subTitle}</div>
       <div className={styles.selected__line}></div>
       <div className={styles.selected__content}>
@@ -28,7 +28,7 @@ export default async function Selected() {
           <div className={styles.selected__author}>{selected[0].author}</div>
           <div className={styles.selected__duration}>
             <div className={styles.selected__duration__img}>
-              <FaPlayCircle />
+              <FaPlayCircle className={styles.selected__play}/>
             </div>
             <div className={styles.selected__duration__number}>
               3 mins 23 secs
@@ -36,6 +36,6 @@ export default async function Selected() {
           </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 }

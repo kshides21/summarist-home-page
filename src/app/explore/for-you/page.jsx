@@ -1,6 +1,6 @@
-import Recommended from "../../../components/Recommended";
-import Selected from "../../../components/Selected";
-import Suggested from "../../../components/Suggested";
+import Recommended from "../../../../components/Recommended";
+import Selected from "../../../../components/Selected";
+import Suggested from "../../../../components/Suggested";
 import styles from "./page.module.css";
 
 export default function ForYou() {

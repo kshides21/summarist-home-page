@@ -1,5 +1,5 @@
 import { FaRegStar, FaRegClock } from "react-icons/fa";
-import styles from "../src/app/for-you/page.module.css";
+import styles from "../src/app/explore/for-you/page.module.css";
 
 export default async function Recommended() {
   const res = await fetch(
