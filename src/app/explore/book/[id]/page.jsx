@@ -1,0 +1,109 @@
+import styles from "./page.module.css";
+import { BsBook, BsClock, BsLightbulb, BsStar } from "react-icons/bs";
+import { TbMicrophone } from "react-icons/tb";
+import { BsTag } from "react-icons/bs";
+
+export default async function BookPage({ params }) {
+  const { id } = await params;
+
+  const res = await fetch(
+    `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`,
+    { cache: "no-store" }
+  );
+
+  const book = await res.json();
+
+  return (
+    <div className={styles.row}>
+      <div className={styles.container}>
+        <div className={styles.inner__wrapper}>
+          <div className={styles.inner__book}>
+            <div className={styles.inner__title}>{book.title}</div>
+            <div className={styles.inner__author}>{book.author}</div>
+            <div className={styles.inner__subtitle}>{book.subTitle}</div>
+            <div className={styles.inner__book__wrapper}>
+              <div className={styles.inner__description__wrapper}>
+                <div className={styles.inner__description}>
+                  <div className={styles.inner__icon}>
+                    <BsStar className={styles.inner__icon__img} />
+                  </div>
+                  <div className={styles.inner__overall__rating}>
+                    {book.averageRating}
+                  </div>
+                  <div className={styles.inner__total__rating}>
+                    ({book.totalRating} ratings)
+                  </div>
+                </div>
+                <div className={styles.inner__description}>
+                  <div className={styles.inner__icon}>
+                    <BsClock className={styles.inner__icon__img} />
+                  </div>
+                  <div className={styles.inner__overall__rating}>
+                    {book.averageRating}
+                  </div>
+                </div>
+                <div className={styles.inner__description}>
+                  <div className={styles.inner__icon}>
+                    <TbMicrophone className={styles.inner__icon__img} />
+                  </div>
+                  <div className={styles.inner__overall__rating}>
+                    {book.type}
+                  </div>
+                </div>
+                <div className={styles.inner__description}>
+                  <div className={styles.inner__icon}>
+                    <BsLightbulb className={styles.inner__icon__img} />
+                  </div>
+                  <div className={styles.inner__overall__rating}>
+                    {book.keyIdeas} Key Ideas
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={styles.read__btn__wrapper}>
+              <button className={styles.read__btn}>
+                <div className={styles.innner__btn__icon}>
+                  <BsBook className={styles.innner__btn__icon__img} />
+                </div>
+                <div className={styles.innner__btn__text}>Read</div>
+              </button>
+              <button className={styles.read__btn}>
+                <div className={styles.innner__btn__icon}>
+                  <TbMicrophone className={styles.innner__btn__icon__img} />
+                </div>
+                <div className={styles.innner__btn__text}>Listen</div>
+              </button>
+            </div>
+            <div className={styles.bookmark}>
+              <div className={styles.bookmark__icon}>
+                <BsTag className={styles.bookmark__icon__img} />
+              </div>
+              <div className={styles.bookmark__text}>
+                Add title to My Library
+              </div>
+            </div>
+            <div className={styles.secondary__title}>What's it about?</div>
+            <div className={styles.tags__wrapper}>
+              <div className={styles.inner__book__tag}>Productivity</div>
+              <div className={styles.inner__book__tag}>
+                Personal Development
+              </div>
+            </div>
+            <div className={styles.inner__book__description}>
+              {book.bookDescription}
+            </div>
+            <h2 className={styles.secondary__title}>About the author</h2>
+            <div className={styles.inner__author__description}>
+              {book.authorDescription}
+            </div>
+          </div>
+          <div className={styles.book__img__wrapper}>
+            <figure className={styles.book__img__figure}>
+              <img className={styles.book__img} alt={book.title} src={book.imageLink}></img>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

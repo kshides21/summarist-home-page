@@ -14,13 +14,19 @@ export default async function Recommended() {
   return (
     <div className={styles.recommended__books}>
       {recommended.map((book) => (
-        <a key={book.id} href="" className={styles.book__wrapper}>
+        <a key={book.id} href={`/explore/book/${book.id}`} className={styles.book__wrapper}>
           <div className={styles.recommended__book}>
-            <figure className={styles.book__img__wrapper}><img
-              src={book.imageLink}
-              alt={book.title}
-              className={styles.book__img}
-            />
+            {book.subscriptionRequired ? (
+              <div className={styles.premium}>Premium</div>
+            ) : (
+              <div className={styles.no__premium}></div>
+            )}
+            <figure className={styles.book__img__wrapper}>
+              <img
+                src={book.imageLink}
+                alt={book.title}
+                className={styles.book__img}
+              />
             </figure>
             <div className={styles.recommended__title}>{book.title}</div>
             <div className={styles.recommended__author}>{book.author}</div>

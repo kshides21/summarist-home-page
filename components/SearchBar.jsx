@@ -1,3 +1,4 @@
+'use-client'
 import styles from "./Sidebar.module.css";
 import { FaSearch } from "react-icons/fa";
 import { LuMenu } from "react-icons/lu";

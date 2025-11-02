@@ -1,3 +1,4 @@
+'use-client'
 import styles from "./Sidebar.module.css";
 import logo from "../assets/logo.png";
 import Image from "next/image";
@@ -15,7 +16,7 @@ export default function Sidebar() {
             </div>
             <div className={styles.sidebar__wrapper}>
                 <div className={styles.sidebar__top}>
-                    <a href="" className={styles.sidebar__link__wrapper}>
+                    <a href="/explore/for-you" className={styles.sidebar__link__wrapper}>
                         <div className={`${styles.sidebar__link__active} ${styles.sidebar__active__line}`}></div>
                         <div className={styles.sidebar__img__wrapper}>
                             <FaHome className={styles.sidebar__img} />

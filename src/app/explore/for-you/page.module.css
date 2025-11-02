@@ -87,6 +87,21 @@
     height: 16px;
 }
 
+.premium {
+    color: #fff;
+    background-color: #032b41;
+    padding: 8px;
+    margin-left: 80px;
+    margin-bottom: 8px;
+    font-size: 10px;
+    text-align: center;
+    border-radius: 24px;
+    max-width: 80px;
+}
+
+.no__premium {
+    margin-top: 34px;
+}
 
 .container__selected {
     display: flex;

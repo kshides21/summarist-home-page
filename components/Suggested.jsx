@@ -14,8 +14,11 @@ export default async function Suggested() {
   return (
     <div className={styles.recommended__books}>
       {suggested.map((book) => (
-        <a key={book.id} href="" className={styles.book__wrapper}>
+        <a key={book.id} href={`/explore/book/${book.id}`} className={styles.book__wrapper}>
           <div className={styles.recommended__book}>
+            { book.subscriptionRequired ? <div className={styles.premium}>
+              Premium
+            </div> : <div className={styles.no__premium}></div>}
             <figure className={styles.book__img__wrapper}><img
               src={book.imageLink}
               alt={book.title}
@@ -48,7 +51,6 @@ export default async function Suggested() {
           </div>
         </a>
       ))}
-      ;
     </div>
   );
 }
