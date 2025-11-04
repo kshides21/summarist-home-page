@@ -61,18 +61,22 @@ export default async function BookPage({ params }) {
               </div>
             </div>
             <div className={styles.read__btn__wrapper}>
+              <a href={`/explore/player/${book.id}`}>
               <button className={styles.read__btn}>
                 <div className={styles.innner__btn__icon}>
                   <BsBook className={styles.innner__btn__icon__img} />
                 </div>
                 <div className={styles.innner__btn__text}>Read</div>
               </button>
+              </a>
+              <a href={`/explore/player/${book.id}`}>
               <button className={styles.read__btn}>
                 <div className={styles.innner__btn__icon}>
                   <TbMicrophone className={styles.innner__btn__icon__img} />
                 </div>
                 <div className={styles.innner__btn__text}>Listen</div>
               </button>
+              </a>
             </div>
             <div className={styles.bookmark}>
               <div className={styles.bookmark__icon}>

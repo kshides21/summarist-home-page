@@ -12,7 +12,7 @@ export default async function Selected() {
   const selected = await res.json();
 
   return (
-    <a href={`/explore/book/f9gy1gpai8`} className={styles.container__selected}>
+    <a href={`/explore/book/${selected[0].id}`} className={styles.container__selected}>
       <div className={styles.selected__sub__title}>{selected[0].subTitle}</div>
       <div className={styles.selected__line}></div>
       <div className={styles.selected__content}>
