@@ -54,7 +54,6 @@ export default function PlayerPage({ params }) {
   };
 
   useEffect(() => {
-    // Re-run this effect when `player` changes so the audio element exists.
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -68,7 +67,6 @@ export default function PlayerPage({ params }) {
 
     const onEnded = () => setIsPlaying(false);
 
-    // If duration is already available set it immediately
     if (
       typeof audio.duration === "number" &&
       !isNaN(audio.duration) &&
@@ -124,7 +122,6 @@ export default function PlayerPage({ params }) {
           preload="metadata"
           onLoadedMetadata={(e) => {
             const dur = e.target.duration;
-            console.log("onLoadedMetadata duration:", dur);
             if (typeof dur === "number" && !isNaN(dur)) setDuration(dur);
           }}
           onTimeUpdate={(e) => {

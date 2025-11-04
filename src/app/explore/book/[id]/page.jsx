@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import { BsBook, BsClock, BsLightbulb, BsStar } from "react-icons/bs";
 import { TbMicrophone } from "react-icons/tb";
 import { BsTag } from "react-icons/bs";
+import Duration from "../../../../../components/Duration.jsx";
 
 export default async function BookPage({ params }) {
   const { id } = await params;
@@ -39,7 +40,7 @@ export default async function BookPage({ params }) {
                     <BsClock className={styles.inner__icon__img} />
                   </div>
                   <div className={styles.inner__overall__rating}>
-                    {book.averageRating}
+                    <Duration audioLink={book.audioLink} />
                   </div>
                 </div>
                 <div className={styles.inner__description}>

@@ -1,5 +1,7 @@
 import { FaRegStar, FaRegClock } from "react-icons/fa";
 import styles from "../src/app/explore/for-you/page.module.css";
+import Duration from "./Duration.jsx";
+
 
 export default async function Suggested() {
   const res = await fetch(
@@ -36,7 +38,7 @@ export default async function Suggested() {
                   <FaRegClock />
                 </div>
                 <div className={styles.recommended__details__numbers}>
-                  {book.averageRating}
+                  <Duration audioLink={book.audioLink} />
                 </div>
               </div>
               <div className={styles.recommended__details}>
