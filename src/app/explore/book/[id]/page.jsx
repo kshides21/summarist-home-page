@@ -3,6 +3,7 @@ import { BsBook, BsClock, BsLightbulb, BsStar } from "react-icons/bs";
 import { TbMicrophone } from "react-icons/tb";
 import { BsTag } from "react-icons/bs";
 import Duration from "../../../../../components/Duration.jsx";
+import Link from "next/link";
 
 export default async function BookPage({ params }) {
   const { id } = await params;
@@ -62,22 +63,22 @@ export default async function BookPage({ params }) {
               </div>
             </div>
             <div className={styles.read__btn__wrapper}>
-              <a href={`/explore/player/${book.id}`}>
-              <button className={styles.read__btn}>
-                <div className={styles.innner__btn__icon}>
-                  <BsBook className={styles.innner__btn__icon__img} />
+              <button >
+              <Link className={styles.read__btn} href={`/explore/player/${book.id}`}>
+                <div className={styles.inner__btn__icon}>
+                  <BsBook className={styles.inner__btn__icon__img} />
                 </div>
-                <div className={styles.innner__btn__text}>Read</div>
+                <div className={styles.inner__btn__text}>Read</div>
+              </Link>
               </button>
-              </a>
-              <a href={`/explore/player/${book.id}`}>
-              <button className={styles.read__btn}>
-                <div className={styles.innner__btn__icon}>
-                  <TbMicrophone className={styles.innner__btn__icon__img} />
+              <button >
+              <Link className={styles.read__btn} href={`/explore/player/${book.id}`}>
+                <div className={styles.inner__btn__icon}>
+                  <TbMicrophone className={styles.inner__btn__icon__img} />
                 </div>
-                <div className={styles.innner__btn__text}>Listen</div>
+                <div className={styles.inner__btn__text}>Listen</div>
+              </Link>
               </button>
-              </a>
             </div>
             <div className={styles.bookmark}>
               <div className={styles.bookmark__icon}>

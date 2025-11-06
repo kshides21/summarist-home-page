@@ -11,14 +11,16 @@ import styles from "./LoginModal.module.css";
 import Image from "next/image";
 import google from "../assets/google.png";
 import { FaUser } from "react-icons/fa";
-
+import Link from "next/link";
 
 export default function LoginModal({ closeLogin, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
@@ -54,6 +56,8 @@ export default function LoginModal({ closeLogin, setUser }) {
     closeLogin();
   };
 
+  if (!mounted) return null;
+
   return ReactDOM.createPortal(
     <>
       <div className={styles.overlay} onClick={closeLogin}></div>
@@ -77,7 +81,9 @@ export default function LoginModal({ closeLogin, setUser }) {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">
-            {isSignUp ? "Create Account" : "Sign In"}
+            <Link href="/explore/for-you" className={styles.login__wrapper}>
+              {isSignUp ? "Create Account" : "Sign In"}
+            </Link>
           </button>
         </form>
 
@@ -91,18 +97,26 @@ export default function LoginModal({ closeLogin, setUser }) {
         </p>
 
         <hr />
+
         <button onClick={handleGoogleLogin} className={styles.btn__wrapper}>
-          <figure className={styles.google__img}>
-          <Image className={styles.size__img} src={google} alt="google" />
-          </figure>
-          <div>Sign in with Google</div>
+          <Link href="/explore/for-you" className={styles.login__wrapper}>
+            <figure className={styles.google__img}>
+              <Image className={styles.size__img} src={google} alt="google" />
+            </figure>
+            <div>Sign in with Google</div>
+          </Link>
         </button>
 
-        <button onClick={handleGuest} className={styles.btn__wrapper}>
-          <figure className={styles.google__img}>
-          <FaUser className={`${styles.size__img} ${styles.color}`} />
-          </figure>
-          <div>Continue as Guest</div>
+        <button
+          onClick={handleGuest}
+          className={`${styles.btn__wrapper} ${styles.width}`}
+        >
+          <Link href="/explore/for-you" className={styles.login__wrapper}>
+            <figure className={styles.google__img}>
+              <FaUser className={`${styles.size__img} ${styles.color}`} />
+            </figure>
+            <div>Continue as Guest</div>
+          </Link>
         </button>
       </div>
     </>,

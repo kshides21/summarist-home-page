@@ -118,6 +118,14 @@ button:disabled {
   height: 100%;
 }
 
+.welcome {
+  margin-right: 24px;
+}
+
+.align__nav {
+  display: flex;
+}
+
 .nav__list {
   cursor: not-allowed;
   color: #032b41;

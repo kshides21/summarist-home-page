@@ -1,5 +1,6 @@
 import { FaPlayCircle } from "react-icons/fa";
 import styles from "../src/app/explore/for-you/page.module.css";
+import Link from "next/link";
 
 export default async function Selected() {
   const res = await fetch(
@@ -12,7 +13,7 @@ export default async function Selected() {
   const selected = await res.json();
 
   return (
-    <a href={`/explore/book/${selected[0].id}`} className={styles.container__selected}>
+    <Link href={`/explore/book/${selected[0].id}`} className={styles.container__selected}>
       <div className={styles.selected__sub__title}>{selected[0].subTitle}</div>
       <div className={styles.selected__line}></div>
       <div className={styles.selected__content}>
@@ -36,6 +37,6 @@ export default async function Selected() {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }

@@ -1,6 +1,7 @@
 import { FaRegStar, FaRegClock } from "react-icons/fa";
 import styles from "../src/app/explore/for-you/page.module.css";
 import Duration from "./Duration.jsx";
+import Link from "next/link";
 
 
 export default async function Suggested() {
@@ -16,7 +17,7 @@ export default async function Suggested() {
   return (
     <div className={styles.recommended__books}>
       {suggested.map((book) => (
-        <a key={book.id} href={`/explore/book/${book.id}`} className={styles.book__wrapper}>
+        <Link key={book.id} href={`/explore/book/${book.id}`} className={styles.book__wrapper}>
           <div className={styles.recommended__book}>
             { book.subscriptionRequired ? <div className={styles.premium}>
               Premium
@@ -51,7 +52,7 @@ export default async function Suggested() {
               </div>
             </div>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );

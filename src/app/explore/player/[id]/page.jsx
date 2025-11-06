@@ -93,8 +93,6 @@ export default function PlayerPage({ params }) {
     }
   };
 
-  console.log(currentTime, duration);
-
   const formatTime = (t) => {
     if (typeof t !== "number" || isNaN(t)) return "00:00";
     const minutes = Math.floor(Math.max(0, t) / 60);

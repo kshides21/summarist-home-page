@@ -10,6 +10,12 @@
   padding: 40px 0;
 }
 
+.inner__btn__icon__img {
+  height: 24px;
+  width: 24px;
+  margin-top: 5px;
+}
+
 .inner__wrapper {
   display: flex;
   gap: 16px;

@@ -3,6 +3,7 @@ import Image from "next/image";
 import logo from "../assets/logo.png";
 import { useState } from "react";
 import LoginModal from "../components/LoginModal";
+import Link from 'next/link';
 
 export default function Navbar() {
   const [user, setUser] = useState<any>(null);
@@ -12,14 +13,16 @@ export default function Navbar() {
     <>
       <nav className="nav">
         <div className="nav__wrapper">
-          <figure className="nav__img--mask">
+          <Link href="/" className="nav__img--mask">
             <Image className="nav__img" src={logo} alt="logo" />
-          </figure>
+          </Link>
           <ul className="nav__list--wrapper">
             {user ? (
               <>
-                <h1>Welcome, {user.displayName || user.email}</h1>
-                <li onClick={() => setUser(null)} className="nav__list nav__list--mobile click">Logout</li>
+              <div className="align__nav">
+                <h3 className="up welcome">Welcome, {user.displayName || user.email}</h3>
+                <li onClick={() => setUser(null)} className="nav__list nav__list--mobile click click-nav up">Logout</li>
+              </div>
               </>
             ) : (
               <li onClick={() => setShowLogin(true)} className="nav__list nav__list--mobile click click-nav">Login</li>
