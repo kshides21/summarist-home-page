@@ -50,7 +50,6 @@ export default function Home() {
               {showLogin && (
                 <LoginModal
                   closeLogin={() => setShowLogin(false)}
-                  setUser={setUser}
                 />
               )}
             </div>

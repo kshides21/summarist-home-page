@@ -157,6 +157,10 @@
   width: 20px;
 }
 
+.bookmark__text__added {
+  font-weight: 500;
+}
+
 .bookmark__icon__img {
   height: 100%;
   width: 100%;

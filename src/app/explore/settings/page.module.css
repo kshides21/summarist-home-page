@@ -1,0 +1,48 @@
+.title {
+    margin: 12px auto;
+}
+
+.container {
+    padding: 40px;
+}
+
+.row {
+    border-top: 1px solid lightslategray;
+}
+
+.img__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img {
+    width: 50%;
+    height: 50%;
+    margin-bottom: 12px;
+}
+
+.button {
+    width: 180px;
+    height: 48px;
+    margin-top: 36px;
+    background-color: #2BD97C;
+    font-size: 20px;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.plan__info {
+    margin: 20px 12px;
+}
+
+
+.plan__title {
+    margin-bottom: 16px;
+}
+
+.plan {
+    margin-left: 8px;
+}

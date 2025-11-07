@@ -31,7 +31,6 @@ export default function Navbar() {
             {showLogin && (
               <LoginModal
                 closeLogin={() => setShowLogin(false)}
-                setUser={setUser}
               />
             )}
             <li className="nav__list nav__list--mobile">About</li>

@@ -11,19 +11,30 @@ import styles from "./LoginModal.module.css";
 import Image from "next/image";
 import google from "../assets/google.png";
 import { FaUser } from "react-icons/fa";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useUser } from "../src/app/context/UserContext";
 
-export default function LoginModal({ closeLogin, setUser }) {
+export default function LoginModal({ closeLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [portalElement, setPortalElement] = useState(null);
+  const { setUser } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
+
+    const el = document.createElement("div");
+    el.setAttribute("id", "login-portal");
+    document.body.appendChild(el);
+    setPortalElement(el);
+
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
+      if (el) document.body.removeChild(el);
     };
   }, []);
 
@@ -36,6 +47,8 @@ export default function LoginModal({ closeLogin, setUser }) {
 
       setUser(result.user);
       closeLogin();
+
+      router.push("/explore/for-you");
     } catch (err) {
       alert(err?.message || "Unknown error occurred");
     }
@@ -46,25 +59,29 @@ export default function LoginModal({ closeLogin, setUser }) {
       const result = await signInWithPopup(auth, googleProvider);
       setUser(result.user);
       closeLogin();
+      router.push("/explore/for-you");
     } catch (err) {
       alert(err?.message || "Unknown error occurred");
     }
   };
 
   const handleGuest = () => {
-    setUser({ displayName: "Guest" });
-    closeLogin();
-  };
+  const guest = { displayName: "Guest" };
+  setUser(guest);
+  localStorage.setItem("user", JSON.stringify(guest));
+  closeLogin();
+  router.push("/explore/for-you");
+};
 
-  if (!mounted) return null;
+  if (!mounted || !portalElement) return null;
 
   return ReactDOM.createPortal(
-    <>
-      <div className={styles.overlay} onClick={closeLogin}></div>
+    <div className={styles.overlay}>
       <div className={styles.modal}>
         <div className={styles.close} onClick={closeLogin}>
-          X
+          ✕
         </div>
+
         <h2>{isSignUp ? "Create Account" : "Sign In to Summarist"}</h2>
 
         <form className={styles.input} onSubmit={handleSubmit}>
@@ -80,10 +97,9 @@ export default function LoginModal({ closeLogin, setUser }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">
-            <Link href="/explore/for-you" className={styles.login__wrapper}>
-              {isSignUp ? "Create Account" : "Sign In"}
-            </Link>
+
+          <button type="submit" className={styles.btn__wrapper}>
+            {isSignUp ? "Create Account" : "Sign In"}
           </button>
         </form>
 
@@ -99,27 +115,23 @@ export default function LoginModal({ closeLogin, setUser }) {
         <hr />
 
         <button onClick={handleGoogleLogin} className={styles.btn__wrapper}>
-          <Link href="/explore/for-you" className={styles.login__wrapper}>
-            <figure className={styles.google__img}>
-              <Image className={styles.size__img} src={google} alt="google" />
-            </figure>
-            <div>Sign in with Google</div>
-          </Link>
+          <figure className={styles.google__img}>
+            <Image className={styles.size__img} src={google} alt="google" />
+          </figure>
+          <div>Sign in with Google</div>
         </button>
 
         <button
           onClick={handleGuest}
           className={`${styles.btn__wrapper} ${styles.width}`}
         >
-          <Link href="/explore/for-you" className={styles.login__wrapper}>
-            <figure className={styles.google__img}>
-              <FaUser className={`${styles.size__img} ${styles.color}`} />
-            </figure>
-            <div>Continue as Guest</div>
-          </Link>
+          <figure className={styles.google__img}>
+            <FaUser className={`${styles.size__img} ${styles.color}`} />
+          </figure>
+          <div>Continue as Guest</div>
         </button>
       </div>
-    </>,
-    document.body
+    </div>,
+    portalElement
   );
 }

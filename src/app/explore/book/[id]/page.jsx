@@ -1,24 +1,41 @@
+"use client";
 import styles from "./page.module.css";
-import { BsBook, BsClock, BsLightbulb, BsStar } from "react-icons/bs";
+import * as React from "react";
+import {
+  BsBook,
+  BsClock,
+  BsLightbulb,
+  BsStar,
+  BsTagFill,
+} from "react-icons/bs";
 import { TbMicrophone } from "react-icons/tb";
 import { BsTag } from "react-icons/bs";
 import Duration from "../../../../../components/Duration.jsx";
 import Link from "next/link";
+import { useUser } from "../../../context/UserContext.jsx";
+import { useState, useEffect } from "react";
 
-export default async function BookPage({ params }) {
-  const { id } = await params;
+export default function BookPage({ params }) {
+  const { addBookToLibrary } = useUser();
+  const { id } = React.use(params);
+  const [bookAdded, setBookAdded] = useState(false);
+  const [book, setBook] = useState(null);
 
-  const res = await fetch(
-    `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`,
-    { cache: "no-store" }
-  );
-
-  const book = await res.json();
+  useEffect(() => {
+    async function fetchBook() {
+      const res = await fetch(
+        `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`
+      );
+      const data = await res.json();
+      setBook(data);
+    }
+    fetchBook();
+  }, [id]);
 
   return (
     <div className={styles.row}>
       <div className={styles.container}>
-        <div className={styles.inner__wrapper}>
+        { book ? (<div className={styles.inner__wrapper}>
           <div className={styles.inner__book}>
             <div className={styles.inner__title}>{book.title}</div>
             <div className={styles.inner__author}>{book.author}</div>
@@ -63,31 +80,54 @@ export default async function BookPage({ params }) {
               </div>
             </div>
             <div className={styles.read__btn__wrapper}>
-              <button >
-              <Link className={styles.read__btn} href={`/explore/player/${book.id}`}>
-                <div className={styles.inner__btn__icon}>
-                  <BsBook className={styles.inner__btn__icon__img} />
-                </div>
-                <div className={styles.inner__btn__text}>Read</div>
-              </Link>
+              <button>
+                <Link
+                  className={styles.read__btn}
+                  href={`/explore/player/${book.id}`}
+                >
+                  <div className={styles.inner__btn__icon}>
+                    <BsBook className={styles.inner__btn__icon__img} />
+                  </div>
+                  <div className={styles.inner__btn__text}>Read</div>
+                </Link>
               </button>
-              <button >
-              <Link className={styles.read__btn} href={`/explore/player/${book.id}`}>
-                <div className={styles.inner__btn__icon}>
-                  <TbMicrophone className={styles.inner__btn__icon__img} />
-                </div>
-                <div className={styles.inner__btn__text}>Listen</div>
-              </Link>
+              <button>
+                <Link
+                  className={styles.read__btn}
+                  href={`/explore/player/${book.id}`}
+                >
+                  <div className={styles.inner__btn__icon}>
+                    <TbMicrophone className={styles.inner__btn__icon__img} />
+                  </div>
+                  <div className={styles.inner__btn__text}>Listen</div>
+                </Link>
               </button>
             </div>
-            <div className={styles.bookmark}>
-              <div className={styles.bookmark__icon}>
-                <BsTag className={styles.bookmark__icon__img} />
+            {bookAdded ? (
+              <div className={styles.bookmark}>
+                <button className={styles.bookmark} onClick={() => addBookToLibrary(book)}>
+                  <div className={styles.bookmark__icon}>
+                    <BsTagFill className={styles.bookmark__icon__img} />
+                  </div>
+                  <div className={styles.bookmark__text__added}>
+                    This title is in your Library!
+                  </div>
+                </button>
               </div>
-              <div className={styles.bookmark__text}>
-                Add title to My Library
+            ) : (
+              <div className={styles.bookmark}>
+                <button className={styles.bookmark}
+                  onClick={() => (addBookToLibrary(book), setBookAdded(true))}
+                >
+                  <div className={styles.bookmark__icon}>
+                    <BsTag className={styles.bookmark__icon__img} />
+                  </div>
+                  <div className={styles.bookmark__text}>
+                    Add title to My Library
+                  </div>
+                </button>
               </div>
-            </div>
+            )}
             <div className={styles.secondary__title}>What's it about?</div>
             <div className={styles.tags__wrapper}>
               <div className={styles.inner__book__tag}>Productivity</div>
@@ -105,10 +145,14 @@ export default async function BookPage({ params }) {
           </div>
           <div className={styles.book__img__wrapper}>
             <figure className={styles.book__img__figure}>
-              <img className={styles.book__img} alt={book.title} src={book.imageLink}></img>
+              <img
+                className={styles.book__img}
+                alt={book.title}
+                src={book.imageLink}
+              ></img>
             </figure>
           </div>
-        </div>
+        </div>) : <div className={styles.skeleton}></div>}
       </div>
     </div>
   );

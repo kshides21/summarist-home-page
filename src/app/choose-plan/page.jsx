@@ -8,11 +8,10 @@ import { FaBookOpen, FaHandshake } from "react-icons/fa";
 import { RiPlantFill } from "react-icons/ri";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
-import LoginModal from "../../../components/LoginModal";
+import Link from "next/link";
 
 export default function PricingPage() {
   const [user, setUser] = useState(null);
-  const [showLogin, setShowLogin] = useState(false);
   const [premiumPlan, setPremiumPlan] = useState(false);
   const [platinumPlan, setPlatinumPlan] = useState(true);
   const [activeIndex, setActiveIndex] = useState(null);
@@ -155,29 +154,29 @@ export default function PricingPage() {
           <div className={styles.plan__card__cta}>
             <span className={styles.btn__wrapper}>
               {premiumPlan ? (
-                <button
-                  onClick={() => setShowLogin(true)}
-                  className={styles.btn}
-                >
-                  Claim your first month
+                <button className={styles.btn}>
+                  <Link
+                    href={{
+                      pathname: "/payment",
+                      query: { plan: "premium", price: "59.99" },
+                    }}
+                  >
+                    Claim your first month
+                  </Link>
                 </button>
               ) : (
-                <button
-                  onClick={() => setShowLogin(true)}
-                  className={styles.btn}
-                >
-                  Start your free trial
+                <button className={styles.btn}>
+                  <Link
+                    href={{
+                      pathname: "/payment",
+                      query: { plan: "platinum", price: "6.99" },
+                    }}
+                  >
+                    Start your free trial
+                  </Link>
                 </button>
               )}
             </span>
-
-            {showLogin && (
-              <LoginModal
-                closeLogin={() => setShowLogin(false)}
-                setUser={setUser}
-              />
-            )}
-
             <div className={styles.disclaimer}>
               *Summarist has a 30-day money back guarantee, no questions asked.
             </div>

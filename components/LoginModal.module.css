@@ -66,6 +66,9 @@
 }
 
 .input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
     input{
         margin-bottom: 12px;
     }
