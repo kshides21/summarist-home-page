@@ -6,11 +6,11 @@ import Link from "next/link";
 import { useUser } from "../src/app/context/UserContext.jsx";
 
 export default function Finished() {
-  const { finishedBooks, removeBookFromFinished } = useUser();
+  const { savedBooks, removeBookFromLibrary } = useUser();
 
   return (
     <div className={styles.recommended__books}>
-      {finishedBooks.map((book) => (
+      {savedBooks.map((book) => (
         <div className={styles.book__wrapper__saved}>
         <Link key={book.id} href={`/explore/book/${book.id}`} className={styles.book__wrapper}>
           <div className={styles.recommended__book}>
@@ -51,10 +51,9 @@ export default function Finished() {
             </div>
           </div>
         </Link>
-         <button className={styles.remove__btn} onClick={() => removeBookFromFinished(book.id)}>Remove Book</button>
+        <button className={styles.remove__btn} onClick={() => removeBookFromLibrary(book.id)}>Remove Book</button>
         </div>
       ))}
-      ;
-    </div>
+          </div>
   );
 }

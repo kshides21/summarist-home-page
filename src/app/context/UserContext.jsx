@@ -21,6 +21,8 @@ export function UserProvider({ children }) {
 
   const addBookToLibrary = (book) => {
     setSavedBooks((prev) => {
+      const exists = prev.some((b) => b.id === book.id);
+      if (exists) return prev;
       const updated = [...prev, book];
       localStorage.setItem("savedBooks", JSON.stringify(updated));
       return updated;
@@ -29,7 +31,25 @@ export function UserProvider({ children }) {
 
   const markBookAsFinished = (book) => {
     setFinishedBooks((prev) => {
+      const exists = prev.some((b) => b.id === book.id);
+      if (exists) return prev;
       const updated = [...prev, book];
+      localStorage.setItem("finishedBooks", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const removeBookFromLibrary = (bookId) => {
+    setSavedBooks((prev) => {
+      const updated = prev.filter((b) => b.id !== bookId);
+      localStorage.setItem("savedBooks", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const removeBookFromFinished = (bookId) => {
+    setFinishedBooks((prev) => {
+      const updated = prev.filter((b) => b.id !== bookId);
       localStorage.setItem("finishedBooks", JSON.stringify(updated));
       return updated;
     });
@@ -54,8 +74,8 @@ export function UserProvider({ children }) {
       value={{
         user,
         setUser,
-        // plan,
-        // setPlan,
+        removeBookFromFinished,
+        removeBookFromLibrary,
         savedBooks,
         addBookToLibrary,
         finishedBooks,

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import { MdForward10, MdReplay10 } from "react-icons/md";
 import { FaPlay, FaPause } from "react-icons/fa";
+import { useUser } from "../../../context/UserContext";
 
 export default function PlayerPage({ params }) {
   const { id } = React.use(params);
@@ -12,6 +13,7 @@ export default function PlayerPage({ params }) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
+  const { markBookAsFinished } = useUser();
 
   useEffect(() => {
     async function fetchBook() {
@@ -126,7 +128,7 @@ export default function PlayerPage({ params }) {
             const t = e.target.currentTime;
             if (typeof t === "number" && !isNaN(t)) setCurrentTime(t);
           }}
-          onEnded={() => setIsPlaying(false)}
+          onEnded={() => {setIsPlaying(false), markBookAsFinished(player)}}
         ></audio>
 
         <div className={styles.audio__track__wrapper}>

@@ -36,6 +36,24 @@
     background-color: rgb(225, 225, 225);
 }
 
+.book__wrapper__saved {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.remove__btn {
+    margin: 12px;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid darkblue;
+    background-color: #2BD97C;
+}
+
+.remove__btn:hover {
+    filter: opacity(0.8);
+}
+
 .book__img__wrapper {
     width: 172px;
     height: 172px;

@@ -5,10 +5,12 @@ import login from "../../../../assets/login.png";
 import Image from "next/image";
 import { useState } from "react";
 import LoginModal from "../../../../components/LoginModal";
+import Finished from "../../../../components/Finished"
+import Saved from "../../../../components/Saved"
 
 export default function Library() {
-  const { user } = useUser();
   const [showLogin, setShowLogin] = useState(false);
+  const { user, savedBooks, finishedBooks } = useUser();
 
   return (
     <div className={styles.container}>
@@ -18,28 +20,28 @@ export default function Library() {
           <>
             <div className={styles.plan__info}>
               <h3 className={styles.plan__title}>Saved Books</h3>
-              <div className={styles.books__count}>0 books</div>
-              {user ? 
+              { savedBooks.length === 1 ? (<div className={styles.books__count}>1 book</div>) : (<div className={styles.books__count}>{savedBooks.length} books</div>)}
+              {savedBooks.length === 0 ? 
                 <div className={styles.nobook__container}>
                   <div className={styles.nobook__wrapper}>
                     <h3 className={styles.finished__none__title}>Save you Favorites!</h3>
                     <div className={styles.finished__none__description}>Save a book to you collection so you can come back to it later!</div>
                   </div> 
                 </div> 
-                : (<div className={styles.book__list}></div>)}
+                : <Saved />}
             </div>
             <div className={styles.row}>
               <div className={styles.plan__info}>
                 <h3 className={styles.plan__title}>Finished Books</h3>
-                <div className={styles.books__count}>0 books</div>
-                {user ? 
+                { finishedBooks.length === 1 ? (<div className={styles.books__count}>1 book</div>) : (<div className={styles.books__count}>{finishedBooks.length} books</div>)}
+                {finishedBooks.length === 0 ? 
                 <div className={styles.nobook__container}>
                   <div className={styles.nobook__wrapper}>
                     <h3 className={styles.finished__none__title}>Done and Dusted</h3>
                     <div className={styles.finished__none__description}>When you finish a book you can check it back out here.</div>
                   </div> 
                 </div> 
-                : (<div className={styles.book__list}></div>)}
+                : <Finished />}
               </div>
             </div>
           </>
@@ -47,7 +49,7 @@ export default function Library() {
           <figure className={styles.img__wrapper}>
             <Image className={styles.img} src={login} alt="login" />
             <h2 className={styles.button__wrapper}>
-              Login to see your subsciption plan.
+              Login to see your Library.
             </h2>
             <button
               onClick={() => setShowLogin(true)}
