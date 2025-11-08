@@ -117,7 +117,7 @@ export default function BookPage({ params }) {
             ) : (
               <div className={styles.bookmark}>
                 <button className={styles.bookmark}
-                  onClick={() => (addBookToLibrary(book), setBookAdded(true))}
+                  onClick={() => {addBookToLibrary(book), setBookAdded(true)}}
                 >
                   <div className={styles.bookmark__icon}>
                     <BsTag className={styles.bookmark__icon__img} />
