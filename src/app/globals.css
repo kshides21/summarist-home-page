@@ -464,6 +464,7 @@ button:disabled {
   color: #2bd97c;
 }
 
+
 @media (max-width: 768px) {
   .landing__content {
     display: flex;

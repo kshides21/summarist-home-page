@@ -1,17 +1,45 @@
+'use client'
 import { FaRegStar, FaRegClock } from "react-icons/fa";
 import styles from "../src/app/explore/for-you/page.module.css";
 import Duration from "./Duration.jsx";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation.js";
+import Skeleton from "./Skeleton.jsx";
 
-export default async function Recommended() {
-  const res = await fetch(
-    "https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended",
-    {
-      cache: "no-store",
+export default function Recommended() {
+const { id } = useParams();
+const [loading, setLoading] = useState(true);
+const [recommended, setRecommended] = useState(null);
+
+useEffect(() => {
+    async function fetchBook() {
+      try {
+        const res = await fetch(
+          "https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended"
+        );
+        const data = await res.json();
+        setRecommended(data);
+      } catch (err) {
+        console.error("Error fetching book:", err);
+      } finally {
+        setLoading(false);
+      }
     }
-  );
+    fetchBook();
+  }, [id]);
 
-  const recommended = await res.json();
+  if (loading) {
+  return (
+    <div className={styles.recommended__books}>
+      {Array.from({ length: 6 }).map((_, index) => (
+        <div key={index} className={styles.book__wrapper}>
+          <Skeleton width="180px" height="264px" margin="0 auto" />
+        </div>
+      ))}
+    </div>
+  );
+}
 
   return (
     <div className={styles.recommended__books}>

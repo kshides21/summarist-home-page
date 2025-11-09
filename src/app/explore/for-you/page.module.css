@@ -208,6 +208,16 @@
     width: 60%;
 }
 
+/* 
+
+Skeleton content
+
+*/
+
+.skeleton__selected {
+    margin: 24px 4px;
+}
+
 @media (max-width: 776px) {
     .selected__duration {
         display: none;
