@@ -267,6 +267,6 @@ SEARCH BAR
   }
 
   .search__dropdown {
-    transform: translateX(48px);
+    max-width: 300px;
   }
 }
