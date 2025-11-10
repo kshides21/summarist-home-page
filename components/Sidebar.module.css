@@ -258,7 +258,15 @@ SEARCH BAR
     transform: translateX(0);
   }
 
+  .search__wrapper {
+    max-width: 572px;
+  }
+
   .burger__menu {
     display: flex;
+  }
+
+  .search__dropdown {
+    right: 8px;
   }
 }
