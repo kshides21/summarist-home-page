@@ -219,7 +219,7 @@ Skeleton content
 }
 
 @media (max-width: 776px) {
-    .selected__duration {
+    .selected__text {
         display: none;
     }
 }
