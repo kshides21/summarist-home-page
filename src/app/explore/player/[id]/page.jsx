@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import { MdForward10, MdReplay10 } from "react-icons/md";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { useUser } from "../../../context/UserContext";
+import Loading from "../../../../../components/PlayerLoading";
 
 export default function PlayerPage({ params }) {
   const { id } = React.use(params);
@@ -14,14 +15,21 @@ export default function PlayerPage({ params }) {
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
   const { markBookAsFinished } = useUser();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchBook() {
-      const res = await fetch(
-        `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`
-      );
-      const data = await res.json();
-      setPlayer(data);
+      try {
+        const res = await fetch(
+          `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`
+        );
+        const data = await res.json();
+        setPlayer(data);
+      } catch (err) {
+        console.error("Error fetching summary page", err)
+      } finally {
+        setLoading(false)
+      }
     }
     fetchBook();
   }, [id]);
@@ -104,7 +112,7 @@ export default function PlayerPage({ params }) {
     }${seconds}`;
   };
 
-  if (!player) return <div>Loading...</div>;
+  if (loading) return <Loading />;
 
   return (
     <div className={styles.summary}>

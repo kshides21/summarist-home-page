@@ -110,6 +110,10 @@
 SEARCH BAR 
 */
 
+.search {
+  position: relative;
+}
+
 .search__background {
   background-color: #fff;
   border-bottom: 1px solid #e1e7ea;
@@ -175,7 +179,7 @@ SEARCH BAR
   background: #fff;
   border: 1px solid #e5e5e5;
   border-radius: 10px;
-  max-height: 250px;
+  max-height: 464px;
   overflow-y: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 2000;
@@ -187,7 +191,7 @@ SEARCH BAR
 .search__item {
   display: flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 4px 12px;
   cursor: pointer;
   transition: background 0.2s ease;
 }

@@ -4,11 +4,72 @@
   animation: shimmer 1.4s ease infinite;
 }
 
+.player__footer {
+  margin-left: -52px;
+  overflow: visible;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  z-index: 1;
+  height: 72px;
+}
+
+.skeleton__book__info {
+  width: 100%;
+  display: flex;
+}
+
+.skeleton__book__img {
+  margin-right: 32px;
+  height: 400px;
+  width: 486px;
+}
+
+.skeleton__book__description {
+  width: 300px;
+  height: 332px;
+}
+
+.skeleton__book__text {
+  margin-right: 24px;
+  margin-top: 44px;
+  width: 486px;
+  height: 364px;
+}
+
 @keyframes shimmer {
   0% {
     background-position: -400px 0;
   }
   100% {
     background-position: 400px 0;
+  }
+}
+
+@media (max-width: 776px) {
+  .player__footer {
+    height: 180px;
+  }
+  .skeleton__book__info {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .skeleton__book__img {
+    height: 320px;
+    width: 300px;
+  }
+
+  .skeleton__book__description {
+    margin: 32px;
+    width: 80%;
+    transform: translateX(-80px);
+  }
+
+  .skeleton__book__text {
+    width: 640px;
+    margin-top: 24px;
+    margin-left: -14px;
   }
 }

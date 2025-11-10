@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./Sidebar.module.css";
 import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import Skeleton from "./Skeleton";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
@@ -21,6 +22,9 @@ export default function SearchBar() {
       setShowDropdown(false);
       return;
     }
+
+    setLoading(true);
+    setShowDropdown(true);
 
     const delayDebounce = setTimeout(async () => {
       try {
@@ -74,8 +78,12 @@ export default function SearchBar() {
         {showDropdown && (
           <ul className={styles.search__dropdown}>
             {loading ? (
-              <li className={styles.search__loading}>Searching...</li>
-            ) : results.length > 0 ? (
+                  Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className={styles.search__item}>
+                      <Skeleton width="354px" height="56px" margin="auto" />
+                    </div>
+                  ))
+                ) : results.length > 0 ? (
               results.map((book) => (
                 <li
                   key={book.id}
