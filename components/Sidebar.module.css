@@ -258,16 +258,11 @@ SEARCH BAR
     transform: translateX(0);
   }
 
-  .search__background {
-    max-width: 340px;
-    transform: translateX(100px);
+  .search__input {
+    max-width: 280px;
   }
 
   .burger__menu {
     display: flex;
-  }
-
-  .search__dropdown {
-    transform: translateX(88px)
   }
 }
