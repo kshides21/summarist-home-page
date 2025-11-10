@@ -265,4 +265,8 @@ SEARCH BAR
   .burger__menu {
     display: flex;
   }
+
+  .search__dropdown {
+    transform: translateX(48px);
+  }
 }
